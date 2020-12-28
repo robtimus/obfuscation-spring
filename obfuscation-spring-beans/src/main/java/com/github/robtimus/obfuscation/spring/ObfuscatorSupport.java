@@ -35,7 +35,7 @@ abstract class ObfuscatorSupport {
 
     ObfuscatorSupport(DefaultListableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
-        objectFactory = this::instantiate;
+        objectFactory = new BeanFactoryObjectFactory(beanFactory);
     }
 
     final DefaultListableBeanFactory beanFactory() {
@@ -52,11 +52,6 @@ abstract class ObfuscatorSupport {
 
     final Obfuscator obfuscator(Annotation[] annotations) {
         return optionalObfuscator(annotations).orElseGet(this::defaultObfuscator);
-    }
-
-    private <T> T instantiate(Class<T> type) {
-        ObjectProvider<T> beanProvider = beanFactory.getBeanProvider(type);
-        return beanProvider.getIfAvailable(() -> beanFactory.createBean(type));
     }
 
     private Obfuscator defaultObfuscator() {
