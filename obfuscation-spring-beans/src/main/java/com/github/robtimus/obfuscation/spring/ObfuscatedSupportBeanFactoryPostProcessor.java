@@ -119,12 +119,8 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
                 if (result == null) {
                     result = beanFactory().getBeanProvider(genericDescriptor.getDependencyType()).getIfAvailable();
                 }
-                if (result != null) {
-                    Annotation[] annotations = descriptor.getAnnotations();
-                    Obfuscator obfuscator = obfuscator(annotations);
-
-                    result = obfuscateValue(result, obfuscator, annotations, genericDescriptor.getResolvableType().getRawClass());
-                }
+                // Do not wrap in Obfuscated just yet, as that will prevent any possible @Value resolving
+                // Instead, let the TypeConverter convert the value instead.
                 return result;
             }
             return delegate.getSuggestedValue(descriptor);

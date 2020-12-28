@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property name="CONSOLE_LOG_PATTERN" value="[%d{yyyy-MM-dd'T'HH:mm:ss.SSS}] %5p - %m%n" />
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      </layout>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <root level="WARN">
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

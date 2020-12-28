@@ -44,7 +44,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.github.robtimus.obfuscation.Obfuscated;
@@ -459,7 +458,6 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         }
 
         @Bean("opp")
-        @Order(Integer.MAX_VALUE)
         static BeanFactoryPostProcessor otherPostProcessor() {
             return beanFactory -> {
                 DefaultListableBeanFactory listableBeanFactory = (DefaultListableBeanFactory) beanFactory;

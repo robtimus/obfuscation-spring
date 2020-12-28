@@ -51,6 +51,7 @@
 
   <modules>
     <module>obfuscation-spring-beans</module>
+    <module>obfuscation-spring-boot-starter</module>
   </modules>
 
   <scm>
@@ -83,6 +84,12 @@
         <groupId>com.github.robtimus</groupId>
         <artifactId>obfuscation-annotations</artifactId>
         <version>${version.obfuscation-annotations}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.robtimus</groupId>
+        <artifactId>obfuscation-spring-beans</artifactId>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
