@@ -108,17 +108,23 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
 
         @Override
         public Object getSuggestedValue(DependencyDescriptor descriptor) {
-            if (Obfuscated.class.isAssignableFrom(descriptor.getDeclaredType())) {
+            if (Obfuscated.class.isAssignableFrom(descriptor.getTypeDescriptor().getType())) {
+                DependencyDescriptor genericDescriptor = genericType(descriptor, 0);
+
                 // Delegate not to delegate but beanFactory's actual autowire candidate resolver.
                 // This allows this autowire candidate resolver to be nested in another delegating autowire candidate resolver implementation
                 // and use the delegating implementations.
                 // This will not trigger this block again due to the different dependency descriptor
-                DependencyDescriptor genericDescriptor = genericType(descriptor, 0);
                 Object result = beanFactory().getAutowireCandidateResolver().getSuggestedValue(genericDescriptor);
                 if (result == null) {
                     result = beanFactory().getBeanProvider(genericDescriptor.getDependencyType()).getIfAvailable();
                 }
-                // No need to wrap or convert; ObfuscatedTypeConverter will take care of that
+                if (result != null) {
+                    Annotation[] annotations = descriptor.getAnnotations();
+                    Obfuscator obfuscator = obfuscator(annotations);
+
+                    result = obfuscateValue(result, obfuscator, annotations, genericDescriptor.getResolvableType().getRawClass());
+                }
                 return result;
             }
             return delegate.getSuggestedValue(descriptor);
@@ -126,6 +132,18 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
 
         @Override
         public Object getLazyResolutionProxyIfNecessary(DependencyDescriptor descriptor, String beanName) {
+            if (Obfuscated.class.isAssignableFrom(descriptor.getTypeDescriptor().getType())) {
+                DependencyDescriptor genericDescriptor = genericType(descriptor, 0);
+
+                Object result = beanFactory().getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(genericDescriptor, beanName);
+                if (result != null) {
+                    Annotation[] annotations = descriptor.getAnnotations();
+                    Obfuscator obfuscator = obfuscator(annotations);
+
+                    result = obfuscateValue(result, obfuscator, annotations, genericDescriptor.getResolvableType().getRawClass());
+                }
+                return result;
+            }
             return delegate.getLazyResolutionProxyIfNecessary(descriptor, beanName);
         }
 
@@ -240,17 +258,6 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
         private ResolvableType getGenericType(MethodParameter methodParameter) {
             TypeDescriptor typeDescriptor = new TypeDescriptor(methodParameter);
             return typeDescriptor.getResolvableType().getGeneric(0);
-        }
-
-        private CharacterRepresentationProvider getCharacterRepresentationProvider(Annotation[] annotations, Class<?> type) {
-            return objectFactory().characterRepresentationProvider(annotations)
-                    .orElseGet(() -> CharacterRepresentationProvider.getDefaultInstance(type));
-        }
-
-        @SuppressWarnings("unchecked")
-        private <T> T obfuscateValue(Object unobfuscatedValue, Obfuscator obfuscator, Annotation[] annotations, Class<?> type) {
-            CharacterRepresentationProvider characterRepresentationProvider = getCharacterRepresentationProvider(annotations, type);
-            return (T) obfuscator.obfuscateObject(unobfuscatedValue, () -> characterRepresentationProvider.toCharSequence(unobfuscatedValue));
         }
     }
 }

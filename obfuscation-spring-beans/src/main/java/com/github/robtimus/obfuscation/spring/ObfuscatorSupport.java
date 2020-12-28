@@ -23,6 +23,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import com.github.robtimus.obfuscation.Obfuscator;
+import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider;
 import com.github.robtimus.obfuscation.annotation.ObjectFactory;
 
 abstract class ObfuscatorSupport {
@@ -61,5 +62,16 @@ abstract class ObfuscatorSupport {
     private Obfuscator defaultObfuscator() {
         ObjectProvider<Obfuscator> beanProvider = beanFactory.getBeanProvider(Obfuscator.class);
         return beanProvider.getIfAvailable(() -> DEFAULT_OBFUSCATOR);
+    }
+
+    private CharacterRepresentationProvider getCharacterRepresentationProvider(Annotation[] annotations, Class<?> type) {
+        return objectFactory().characterRepresentationProvider(annotations)
+                .orElseGet(() -> CharacterRepresentationProvider.getDefaultInstance(type));
+    }
+
+    @SuppressWarnings("unchecked")
+    final <T> T obfuscateValue(Object unobfuscatedValue, Obfuscator obfuscator, Annotation[] annotations, Class<?> type) {
+        CharacterRepresentationProvider characterRepresentationProvider = getCharacterRepresentationProvider(annotations, type);
+        return (T) obfuscator.obfuscateObject(unobfuscatedValue, () -> characterRepresentationProvider.toCharSequence(unobfuscatedValue));
     }
 }

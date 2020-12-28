@@ -27,6 +27,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.Objects;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -42,6 +43,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -57,6 +59,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
     private static final String OBFUSCATED_STRING = "obfuscatedString";
     private static final String OBFUSCATED_LOCAL_DATE = "obfuscatedLocalDate";
     private static final String OBFUSCATED_LOCAL_DATE_TIME = "obfuscatedLocalDateTime";
+    private static final String OBFUSCATED_DATE = "obfuscatedDate";
 
     private static final Clock CLOCK = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
@@ -83,6 +86,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<String> expectedString = obfuscator.obfuscateObject(value);
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
 
                 BeanWithAutowiredObfuscatedFields bean = context.getBean(BeanWithAutowiredObfuscatedFields.class);
 
@@ -94,6 +98,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                 assertEquals(expectedLocalDateTime, bean.obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), bean.obfuscatedLocalDateTime.toString());
+
+                assertEquals(expectedDate, bean.obfuscatedDate);
+                assertEquals(expectedDate.toString(), bean.obfuscatedDate.toString());
             }
         }
 
@@ -118,6 +125,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<String> expectedString = obfuscator.obfuscateObject(value);
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
 
                 BeanWithAutowiredObfuscatedFields bean = context.getBean(BeanWithAutowiredObfuscatedFields.class);
 
@@ -129,6 +137,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                 assertEquals(expectedLocalDateTime, bean.obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), bean.obfuscatedLocalDateTime.toString());
+
+                assertEquals(expectedDate, bean.obfuscatedDate);
+                assertEquals(expectedDate.toString(), bean.obfuscatedDate.toString());
             }
         }
 
@@ -151,6 +162,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<String> expectedString = obfuscator.obfuscateObject(value);
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
 
                 BeanWithAutowiredAnnotatedObfuscatedField bean = context.getBean(BeanWithAutowiredAnnotatedObfuscatedField.class);
 
@@ -163,6 +175,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                 assertEquals(expectedLocalDateTime, bean.obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), bean.obfuscatedLocalDateTime.toString());
+
+                assertEquals(expectedDate, bean.obfuscatedDate);
+                assertEquals(expectedDate.toString(), bean.obfuscatedDate.toString());
             }
         }
     }
@@ -190,6 +205,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<String> expectedString = obfuscator.obfuscateObject(value);
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
 
                 BeanWithObfuscatedConstructorArgument bean = context.getBean(BeanWithObfuscatedConstructorArgument.class);
 
@@ -201,6 +217,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                 assertEquals(expectedLocalDateTime, bean.obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), bean.obfuscatedLocalDateTime.toString());
+
+                assertEquals(expectedDate, bean.obfuscatedDate);
+                assertEquals(expectedDate.toString(), bean.obfuscatedDate.toString());
             }
         }
 
@@ -225,6 +244,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<String> expectedString = obfuscator.obfuscateObject(value);
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
 
                 BeanWithObfuscatedConstructorArgument bean = context.getBean(BeanWithObfuscatedConstructorArgument.class);
 
@@ -236,6 +256,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                 assertEquals(expectedLocalDateTime, bean.obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), bean.obfuscatedLocalDateTime.toString());
+
+                assertEquals(expectedDate, bean.obfuscatedDate);
+                assertEquals(expectedDate.toString(), bean.obfuscatedDate.toString());
             }
         }
 
@@ -258,6 +281,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<String> expectedString = obfuscator.obfuscateObject(value);
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
 
                 BeanWithAnnotatedObfuscatedConstructorArgument bean = context.getBean(BeanWithAnnotatedObfuscatedConstructorArgument.class);
 
@@ -270,6 +294,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                 assertEquals(expectedLocalDateTime, bean.obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), bean.obfuscatedLocalDateTime.toString());
+
+                assertEquals(expectedDate, bean.obfuscatedDate);
+                assertEquals(expectedDate.toString(), bean.obfuscatedDate.toString());
             }
         }
     }
@@ -315,6 +342,13 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
                 assertEquals(expectedLocalDateTime, obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), obfuscatedLocalDateTime.toString());
+
+                @SuppressWarnings("unchecked")
+                Obfuscated<Date> obfuscatedDate = context.getBean(OBFUSCATED_DATE, Obfuscated.class);
+
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
+                assertEquals(expectedDate, obfuscatedDate);
+                assertEquals(expectedDate.toString(), obfuscatedDate.toString());
             }
         }
 
@@ -357,6 +391,13 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
                 assertEquals(expectedLocalDateTime, obfuscatedLocalDateTime);
                 assertEquals(expectedLocalDateTime.toString(), obfuscatedLocalDateTime.toString());
+
+                @SuppressWarnings("unchecked")
+                Obfuscated<Date> obfuscatedDate = context.getBean(OBFUSCATED_DATE, Obfuscated.class);
+
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
+                assertEquals(expectedDate, obfuscatedDate);
+                assertEquals(expectedDate.toString(), obfuscatedDate.toString());
             }
         }
 
@@ -391,6 +432,20 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 Obfuscated<LocalDate> expectedLocalDate = obfuscator.obfuscateObject(LocalDate.now());
                 assertEquals(expectedLocalDate, obfuscatedLocalDate);
                 assertEquals(expectedLocalDate.toString(), obfuscatedLocalDate.toString());
+
+                @SuppressWarnings("unchecked")
+                Obfuscated<LocalDateTime> obfuscatedLocalDateTime = context.getBean(OBFUSCATED_LOCAL_DATE_TIME, Obfuscated.class);
+
+                Obfuscated<LocalDateTime> expectedLocalDateTime = obfuscator.obfuscateObject(LocalDateTime.now(CLOCK));
+                assertEquals(expectedLocalDateTime, obfuscatedLocalDateTime);
+                assertEquals(expectedLocalDateTime.toString(), obfuscatedLocalDateTime.toString());
+
+                @SuppressWarnings("unchecked")
+                Obfuscated<Date> obfuscatedDate = context.getBean(OBFUSCATED_DATE, Obfuscated.class);
+
+                Obfuscated<Date> expectedDate = obfuscator.obfuscateObject(new Date(0));
+                assertEquals(expectedDate, obfuscatedDate);
+                assertEquals(expectedDate.toString(), obfuscatedDate.toString());
             }
         }
     }
@@ -433,6 +488,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                     public Object getSuggestedValue(DependencyDescriptor descriptor) {
                         if (descriptor.getDeclaredType() == LocalDateTime.class) {
                             return LocalDateTime.now(CLOCK);
+                        }
+                        if (descriptor.getDeclaredType() == Date.class) {
+                            return new Date(0);
                         }
                         return resolver.getSuggestedValue(descriptor);
                     }
@@ -482,6 +540,10 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
         @Autowired
         private Obfuscated<LocalDateTime> obfuscatedLocalDateTime;
+
+        @Autowired
+        @Lazy
+        private Obfuscated<Date> obfuscatedDate;
     }
 
     static class BeanWithAutowiredAnnotatedObfuscatedField {
@@ -499,6 +561,11 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         @Autowired
         @ObfuscateUsing(TestObfuscatorProvider.class)
         private Obfuscated<LocalDateTime> obfuscatedLocalDateTime;
+
+        @Autowired
+        @Lazy
+        @ObfuscateUsing(TestObfuscatorProvider.class)
+        private Obfuscated<Date> obfuscatedDate;
     }
 
     static class BeanWithObfuscatedConstructorArgument {
@@ -506,13 +573,15 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         private final Obfuscated<String> obfuscatedString;
         private final Obfuscated<LocalDate> obfuscatedLocalDate;
         private final Obfuscated<LocalDateTime> obfuscatedLocalDateTime;
+        private final Obfuscated<Date> obfuscatedDate;
 
         BeanWithObfuscatedConstructorArgument(@Value(VALUE) Obfuscated<String> obfuscatedString, Obfuscated<LocalDate> obfuscatedLocalDate,
-                Obfuscated<LocalDateTime> obfuscatedLocalDateTime) {
+                Obfuscated<LocalDateTime> obfuscatedLocalDateTime, @Lazy Obfuscated<Date> obfuscatedDate) {
 
             this.obfuscatedString = Objects.requireNonNull(obfuscatedString);
             this.obfuscatedLocalDate = Objects.requireNonNull(obfuscatedLocalDate);
             this.obfuscatedLocalDateTime = Objects.requireNonNull(obfuscatedLocalDateTime);
+            this.obfuscatedDate = Objects.requireNonNull(obfuscatedDate);
         }
     }
 
@@ -521,6 +590,7 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         private final Obfuscated<String> obfuscatedString;
         private final Obfuscated<LocalDate> obfuscatedLocalDate;
         private final Obfuscated<LocalDateTime> obfuscatedLocalDateTime;
+        private final Obfuscated<Date> obfuscatedDate;
 
         BeanWithAnnotatedObfuscatedConstructorArgument(
                 @Value(VALUE)
@@ -528,11 +598,13 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 @RepresentedBy(TestCharacterRepresentationProvider.class)
                 Obfuscated<String> obfuscatedString,
                 @ObfuscateUsing(TestObfuscatorProvider.class) Obfuscated<LocalDate> obfuscatedLocalDate,
-                @ObfuscateUsing(TestObfuscatorProvider.class) Obfuscated<LocalDateTime> obfuscatedLocalDateTime) {
+                @ObfuscateUsing(TestObfuscatorProvider.class) Obfuscated<LocalDateTime> obfuscatedLocalDateTime,
+                @Lazy @ObfuscateUsing(TestObfuscatorProvider.class) Obfuscated<Date> obfuscatedDate) {
 
             this.obfuscatedString = Objects.requireNonNull(obfuscatedString);
             this.obfuscatedLocalDate = Objects.requireNonNull(obfuscatedLocalDate);
             this.obfuscatedLocalDateTime = Objects.requireNonNull(obfuscatedLocalDateTime);
+            this.obfuscatedDate = Objects.requireNonNull(obfuscatedDate);
         }
     }
 
@@ -551,6 +623,11 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         @Bean(OBFUSCATED_LOCAL_DATE_TIME)
         Obfuscated<LocalDateTime> obfuscatedLocalDateTime(Obfuscated<LocalDateTime> obfuscatedLocalDateTime) {
             return obfuscatedLocalDateTime;
+        }
+
+        @Bean(OBFUSCATED_DATE)
+        Obfuscated<Date> obfuscatedDate(Obfuscated<Date> obfuscatedDate) {
+            return obfuscatedDate;
         }
     }
 
@@ -576,6 +653,11 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
                 @ObfuscateUsing(TestObfuscatorProvider.class) Obfuscated<LocalDateTime> obfuscatedLocalDateTime) {
 
             return obfuscatedLocalDateTime;
+        }
+
+        @Bean(OBFUSCATED_DATE)
+        Obfuscated<Date> obfuscatedDate(@Lazy @ObfuscateUsing(TestObfuscatorProvider.class) Obfuscated<Date> obfuscatedDate) {
+            return obfuscatedDate;
         }
     }
 }
