@@ -48,10 +48,8 @@ public class ObfuscatorSupportBeanFactoryPostProcessor implements BeanFactoryPos
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        if (beanFactory instanceof DefaultListableBeanFactory) {
-            DefaultListableBeanFactory listableBeanFactory = (DefaultListableBeanFactory) beanFactory;
-            listableBeanFactory.setAutowireCandidateResolver(new ObfuscatorAutowireCandidateResolver(listableBeanFactory));
-        }
+        DefaultListableBeanFactory listableBeanFactory = (DefaultListableBeanFactory) beanFactory;
+        listableBeanFactory.setAutowireCandidateResolver(new ObfuscatorAutowireCandidateResolver(listableBeanFactory));
     }
 
     private static final class ObfuscatorAutowireCandidateResolver extends ObfuscatorSupport implements AutowireCandidateResolver {
