@@ -484,10 +484,10 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
 
                     @Override
                     public Object getSuggestedValue(DependencyDescriptor descriptor) {
-                        if (descriptor.getDeclaredType() == LocalDateTime.class) {
+                        if (descriptor.getDependencyType() == LocalDateTime.class) {
                             return LocalDateTime.now(CLOCK);
                         }
-                        if (descriptor.getDeclaredType() == Date.class) {
+                        if (descriptor.getDependencyType() == Date.class) {
                             return new Date(0);
                         }
                         return resolver.getSuggestedValue(descriptor);

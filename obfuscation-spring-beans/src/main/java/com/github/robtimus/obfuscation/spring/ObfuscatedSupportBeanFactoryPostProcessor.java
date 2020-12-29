@@ -106,8 +106,8 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
 
         @Override
         public Object getSuggestedValue(DependencyDescriptor descriptor) {
-            if (Obfuscated.class.isAssignableFrom(descriptor.getTypeDescriptor().getType())) {
-                DependencyDescriptor genericDescriptor = genericType(descriptor, 0);
+            if (Obfuscated.class.isAssignableFrom(descriptor.getDependencyType())) {
+                DependencyDescriptor genericDescriptor = genericType(descriptor);
 
                 // Delegate not to delegate but beanFactory's actual autowire candidate resolver.
                 // This allows this autowire candidate resolver to be nested in another delegating autowire candidate resolver implementation
@@ -126,8 +126,8 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
 
         @Override
         public Object getLazyResolutionProxyIfNecessary(DependencyDescriptor descriptor, String beanName) {
-            if (Obfuscated.class.isAssignableFrom(descriptor.getTypeDescriptor().getType())) {
-                DependencyDescriptor genericDescriptor = genericType(descriptor, 0);
+            if (Obfuscated.class.isAssignableFrom(descriptor.getDependencyType())) {
+                DependencyDescriptor genericDescriptor = genericType(descriptor);
 
                 Object result = beanFactory().getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(genericDescriptor, beanName);
                 if (result != null) {
@@ -147,35 +147,10 @@ public class ObfuscatedSupportBeanFactoryPostProcessor implements BeanFactoryPos
             return clonedDelegate == delegate ? this : new ObfuscatedAutowireCandidateResolver(clonedDelegate, beanFactory());
         }
 
-        @SuppressWarnings("serial")
-        private DependencyDescriptor genericType(DependencyDescriptor descriptor, int index) {
-            ResolvableType resolvableType = descriptor.getResolvableType();
-            ResolvableType genericResolvableType = resolvableType.getGeneric(index);
-            Class<?> genericDeclaredType = genericResolvableType.getRawClass();
-            Class<?> genericDependencyType = genericDeclaredType;
-            TypeDescriptor genericTypeDescriptor = new TypeDescriptor(genericResolvableType, genericDeclaredType, descriptor.getAnnotations());
-
-            return new DependencyDescriptor(descriptor) {
-                @Override
-                public Class<?> getDeclaredType() {
-                    return genericDeclaredType;
-                }
-
-                @Override
-                public Class<?> getDependencyType() {
-                    return genericDependencyType;
-                }
-
-                @Override
-                public ResolvableType getResolvableType() {
-                    return genericResolvableType;
-                }
-
-                @Override
-                public TypeDescriptor getTypeDescriptor() {
-                    return genericTypeDescriptor;
-                }
-            };
+        private DependencyDescriptor genericType(DependencyDescriptor descriptor) {
+            DependencyDescriptor genericDescriptor = new DependencyDescriptor(descriptor);
+            genericDescriptor.increaseNestingLevel();
+            return genericDescriptor;
         }
     }
 
