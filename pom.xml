@@ -174,4 +174,13 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <profiles>
+    <profile>
+      <id>min-versions</id>
+      <properties>
+        <version.spring-boot>2.3.1.RELEASE</version.spring-boot>
+      </properties>
+    </profile>
+  </profiles>
 </project>
