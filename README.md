@@ -41,9 +41,13 @@ Out-of-the-box, the default obfuscator is [Obfuscator.fixedLength(3)](https://ro
 * Provide a custom bean of type [Obfuscator](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html).
 * Define the default obfuscator in the application properties. See [Properties](https://robtimus.github.io/obfuscation-spring/properties.html) for more information.
 
+## ObfuscatorProvider implementations
+
+If an [ObfuscatorProvider](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorProvider.html) type is already available as a bean, this bean will be used. Otherwise, the type is instantiated using Spring's own bean factory. This allows implementations to use autowired fields.
+
 ## Vanilla Spring
 
-The above only works when using `obfuscation-spring-boot-starter`. To add obfuscation support to vanilla Spring:
+The automatic support for autowiring `Obfuscator` and `Obfuscated` only works when using `obfuscation-spring-boot-starter`. To add obfuscation support to vanilla Spring:
 
 * Add [obfuscation-spring-beans](https://robtimus.github.io/obfuscation-spring/obfuscation-spring-beans/dependency-info.html) as a dependency to your project instead of `obfuscation-spring-boot-starter`.
 * Provide a bean of type [ObfuscatorSupportBeanFactoryPostProcessor](https://robtimus.github.io/obfuscation-spring/apidocs/com/github/robtimus/obfuscation/spring/ObfuscatorSupportBeanFactoryPostProcessor.html) to allow `Obfuscator` to be autowired as above.

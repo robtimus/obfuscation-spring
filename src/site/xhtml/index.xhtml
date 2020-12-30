@@ -52,8 +52,12 @@ private Obfuscated&lt;MyBean&gt; obfuscatedBean;</pre>
     <li>Define the default obfuscator in the application properties. See <a href="properties.html">Properties</a> for more information.</li>
   </ul>
 
+  <h3>ObfuscatorProvider implementations</h3>
+  <p>If an <a href="https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorProvider.html">ObfuscatorProvider</a> type is already available as a bean, this bean will be used.
+     Otherwise, the type is instantiated using Spring's own bean factory. This allows implementations to use autowired fields.</p>
+
   <h3>Vanilla Spring</h3>
-  <p>The above only works when using <tt>obfuscation-spring-boot-starter</tt>. To add obfuscation support to vanilla Spring:</p>
+  <p>The automatic support for autowiring <tt>Obfuscator</tt> and <tt>Obfuscated</tt> only works when using <tt>obfuscation-spring-boot-starter</tt>. To add obfuscation support to vanilla Spring:</p>
   <ul>
     <li>Add <a href="obfuscation-spring-beans/dependency-info.html">obfuscation-spring-beans</a> as a dependency to your project instead of <tt>obfuscation-spring-boot-starter</tt>.</li>
     <li>Provide a bean of type <a href="apidocs/com/github/robtimus/obfuscation/spring/ObfuscatorSupportBeanFactoryPostProcessor.html">ObfuscatorSupportBeanFactoryPostProcessor</a> to allow <tt>Obfuscator</tt> to be autowired as above.</li>

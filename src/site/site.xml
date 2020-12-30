@@ -28,6 +28,7 @@
     <menu ref="modules" />
     <menu name="Auto-Configuration">
       <item name="Properties" href="properties.html" />
+      <item name="Obfuscators" href="obfuscators.html" />
     </menu>
   </body>
 </project>

@@ -22,11 +22,15 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -215,10 +219,61 @@ public class ObfuscatorProperties {
         this.providerClass = providerClass;
     }
 
+    /**
+     * Creates an obfuscator based on the properties configured in this object.
+     *
+     * @param beanFactory A bean factory to use to create instances of {@link ObfuscatorProvider} if needed.
+     * @return The created obfuscator.
+     * @throws NullPointerException If the given bean factory is {@code null}.
+     * @throws IllegalStateException If this object is in an inconsistent state.
+     */
     public Obfuscator createObfuscator(AutowireCapableBeanFactory beanFactory) {
-        ObfuscationMode obfuscationMode = determineObfuscationMode();
         ObjectFactory objectFactory = new BeanFactoryObjectFactory(beanFactory);
+        return createObfuscator(objectFactory);
+    }
+
+    /**
+     * Creates an obfuscator based on the properties configured in this object.
+     *
+     * @param objectFactory The object factory to use to create instances of {@link ObfuscatorProvider} if needed.
+     * @return The created obfuscator.
+     * @throws NullPointerException If the given object factory is {@code null}.
+     * @throws IllegalStateException If this object is in an inconsistent state.
+     */
+    public Obfuscator createObfuscator(ObjectFactory objectFactory) {
+        Objects.requireNonNull(objectFactory);
+        ObfuscationMode obfuscationMode = determineObfuscationMode();
         return obfuscationMode.factory.apply(this, objectFactory);
+    }
+
+    /**
+     * Creates obfuscators based on the properties configured in multiple properties objects.
+     *
+     * @param properties A collection of properties object for which to create obfuscators.
+     * @param beanFactory A bean factory to use to create instances of {@link ObfuscatorProvider} if needed.
+     * @return The created obfuscators.
+     * @throws NullPointerException If the given collection, any of its elements, or the given bean factory is {@code null}.
+     * @throws IllegalStateException If any of the properties objects is in an inconsistent state.
+     */
+    public static List<Obfuscator> createObfuscators(Collection<ObfuscatorProperties> properties, AutowireCapableBeanFactory beanFactory) {
+        ObjectFactory objectFactory = new BeanFactoryObjectFactory(beanFactory);
+        return createObfuscators(properties, objectFactory);
+    }
+
+    /**
+     * Creates obfuscators based on the properties configured in multiple properties objects.
+     *
+     * @param properties A collection of properties object for which to create obfuscators.
+     * @param objectFactory The object factory to use to create instances of {@link ObfuscatorProvider} if needed.
+     * @return The created obfuscators.
+     * @throws NullPointerException If the given collection, any of its elements, or the given bean factory is {@code null}.
+     * @throws IllegalStateException If any of the properties objects is in an inconsistent state.
+     */
+    public static List<Obfuscator> createObfuscators(Collection<ObfuscatorProperties> properties, ObjectFactory objectFactory) {
+        Objects.requireNonNull(objectFactory);
+        return properties.stream()
+                .map(p -> p.createObfuscator(objectFactory))
+                .collect(Collectors.toList());
     }
 
     ObfuscationMode determineObfuscationMode() {
