@@ -24,7 +24,6 @@
     <menu name="obfuscation-spring">
       <item name="Overview" href="index.html" />
       <item name="Releases" href="https://github.com/robtimus/obfuscation-spring/releases" />
-      <item name="JavaDocs" href="apidocs/index.html" />
     </menu>
     <menu ref="modules" />
     <menu name="Auto-Configuration">
