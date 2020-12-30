@@ -17,11 +17,18 @@
 
 package com.github.robtimus.obfuscation.spring.boot.autoconfigure;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import com.github.robtimus.obfuscation.Obfuscator;
 import com.github.robtimus.obfuscation.spring.ObfuscatorSupportBeanFactoryPostProcessor;
 
+/**
+ * {@link EnableAutoConfiguration Auto-configuration} for {@link Obfuscator} autowire support.
+ *
+ * @author Rob Spoor
+ */
 @Configuration
 @ConditionalOnProperty(name = "obfuscation.obfuscator-support.enabled", matchIfMissing = true)
 @SuppressWarnings("javadoc")
