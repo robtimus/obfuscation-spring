@@ -15,15 +15,20 @@
   limitations under the License.
 -->
 
-<project name="obfuscation-spring-boot"
+<project name="obfuscation-spring"
   xmlns="https://maven.apache.org/xsd/decoration-1.7.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="https://maven.apache.org/xsd/decoration-1.7.0.xsd https://maven.apache.org/xsd/decoration-1.7.0.xsd">
 
   <body>
-    <menu name="obfuscation-spring-boot">
+    <head />
+    <menu name="obfuscation-spring">
       <item name="Overview" href="index.html" />
-      <item name="Releases" href="https://github.com/robtimus/obfuscation-spring-boot/releases" />
+      <item name="Releases" href="https://github.com/robtimus/obfuscation-spring/releases" />
       <item name="JavaDocs" href="apidocs/index.html" />
+    </menu>
+    <menu ref="modules" />
+    <menu name="Auto-Configuration">
+      <item name="Properties" href="properties.html" />
     </menu>
   </body>
 </project>

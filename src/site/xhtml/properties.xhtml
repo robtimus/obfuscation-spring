@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Properties</title>
+  <link rel="stylesheet" href="css/highlight.css" />
+</head>
+<body>
+<div class="section">
+  <h2>Properties</h2>
+  <p>The following properties can be defined in your <tt>application.properties</tt> file, in your <tt>application.yml</tt> file, or as command line switches.</p>
+
+  <h3>Default obfuscator</h3>
+
+  <h4><a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#all-char-">Obfuscator.all</a></h4>
+  <pre class="source">
+<span class="hl-attribute">obfuscation.default-obfuscator.mode</span>=ALL <span class="hl-comment"># Must be explicitly set to ALL</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.mask-char</span>=* <span class="hl-comment"># The mask character</span>
+</pre>
+
+  <h4><a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#none--">Obfuscator.none</a></h4>
+  <pre class="source">
+<span class="hl-attribute">obfuscation.default-obfuscator.mode</span>=NONE <span class="hl-comment"># Must be explicitly set to NONE</span>
+</pre>
+
+  <h4><a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#fixedLength-int-char-">Obfuscator.fixedLength</a></h4>
+  <pre class="source">
+<span class="hl-attribute">obfuscation.default-obfuscator.fixed-length</span>= <span class="hl-comment"># The fixed length to use</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.mask-char</span>=* <span class="hl-comment"># The mask character</span>
+</pre>
+
+  <h4><a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#fixedValue-java.lang.String-">Obfuscator.fixedValue</a></h4>
+  <pre class="source">
+<span class="hl-attribute">obfuscation.default-obfuscator.fixed-value</span>= <span class="hl-comment"># The fixed value to use</span>
+</pre>
+
+  <h4><a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#portion--">Obfuscator.portion</a></h4>
+  <pre class="source">
+<span class="hl-comment"># At least one of the first 5 properties must be set</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.keep-at-start</span>=0 <span class="hl-comment"># The number of characters at the start that created obfuscators will skip when obfuscating</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.keep-at-end</span>=0 <span class="hl-comment"># The number of characters at the end that created obfuscators will skip when obfuscating</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.at-least-from-start</span>=0 <span class="hl-comment"># The minimum number of characters from the start that need to be obfuscated</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.at-least-from-end</span>=0 <span class="hl-comment"># The minimum number of characters from the end that need to be obfuscated</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.fixed-total-length</span>=-1 <span class="hl-comment"># The fixed total length to use for obfuscated contents</span>
+<span class="hl-attribute">obfuscation.default-obfuscator.mask-char</span>=* <span class="hl-comment"># The mask character</span>
+</pre>
+
+  <h4><a href="https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorProvider.html">ObfuscatorProvider</a></h4>
+  <pre class="source">
+<span class="hl-attribute">obfuscation.default-obfuscator.provider-class</span>= <span class="hl-comment"># The ObfuscatorProvider class to use</span>
+</pre>
+</div>
+</body>
+</html>

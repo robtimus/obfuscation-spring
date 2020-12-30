@@ -20,10 +20,6 @@
   xsi:schemaLocation="https://maven.apache.org/xsd/decoration-1.7.0.xsd https://maven.apache.org/xsd/decoration-1.7.0.xsd">
 
   <body>
-    <menu name="obfuscation-spring">
-      <item name="Overview" href="index.html" />
-      <item name="Releases" href="https://github.com/robtimus/obfuscation-spring-boot/releases" />
-      <item name="JavaDocs" href="apidocs/index.html" />
-    </menu>
+    <menu ref="parent" />
   </body>
 </project>

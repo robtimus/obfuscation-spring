@@ -35,7 +35,6 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.validation.annotation.Validated;
 import com.github.robtimus.obfuscation.Obfuscator;
-import com.github.robtimus.obfuscation.Obfuscator.PortionBuilder;
 import com.github.robtimus.obfuscation.annotation.ObfuscatorProvider;
 import com.github.robtimus.obfuscation.annotation.ObjectFactory;
 import com.github.robtimus.obfuscation.spring.BeanFactoryObjectFactory;
@@ -275,25 +274,14 @@ public class ObfuscatorProperties {
     }
 
     private Obfuscator createPortionObfuscator() {
-        PortionBuilder builder = Obfuscator.portion()
-                .withMaskChar(maskChar());
-
-        if (keepAtStart != null) {
-            builder = builder.keepAtStart(keepAtStart);
-        }
-        if (keepAtEnd != null) {
-            builder = builder.keepAtEnd(keepAtEnd);
-        }
-        if (atLeastFromStart != null) {
-            builder = builder.atLeastFromStart(atLeastFromStart);
-        }
-        if (atLeastFromEnd != null) {
-            builder = builder.atLeastFromEnd(atLeastFromEnd);
-        }
-        if (fixedTotalLength != null) {
-            builder = builder.withFixedTotalLength(fixedTotalLength);
-        }
-        return builder.build();
+        return Obfuscator.portion()
+                .keepAtStart(keepAtStart != null ? keepAtStart : 0)
+                .keepAtEnd(keepAtEnd != null ? keepAtEnd : 0)
+                .atLeastFromStart(atLeastFromStart != null ? atLeastFromStart : 0)
+                .atLeastFromEnd(atLeastFromEnd != null ? atLeastFromEnd : 0)
+                .withFixedTotalLength(fixedTotalLength != null ? fixedTotalLength : -1)
+                .withMaskChar(maskChar())
+                .build();
     }
 
     private Obfuscator createObfuscatorFromProvider(ObjectFactory objectFactory) {

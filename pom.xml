@@ -26,13 +26,13 @@
     <relativePath />
   </parent>
 
-  <artifactId>obfuscation-spring-boot</artifactId>
+  <artifactId>obfuscation-spring</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>obfuscation-spring-boot</name>
+  <name>obfuscation-spring</name>
   <description>Provides Spring and Spring Boot obfuscation support</description>
-  <url>https://robtimus.github.io/obfuscation-spring-boot/</url>
+  <url>https://robtimus.github.io/obfuscation-spring/</url>
   <inceptionYear>2020</inceptionYear>
 
   <licenses>
@@ -55,21 +55,23 @@
   </modules>
 
   <scm>
-    <connection>scm:git:git@github.com:robtimus/obfuscation-spring-boot.git</connection>
-    <developerConnection>scm:git:git@github.com:robtimus/obfuscation-spring-boot.git</developerConnection>
+    <connection>scm:git:git@github.com:robtimus/obfuscation-spring.git</connection>
+    <developerConnection>scm:git:git@github.com:robtimus/obfuscation-spring.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/robtimus/obfuscation-spring-boot</url>
+    <url>https://github.com/robtimus/obfuscation-spring</url>
   </scm>
 
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/robtimus/obfuscation-spring-boot/issues</url>
+    <url>https://github.com/robtimus/obfuscation-spring/issues</url>
   </issueManagement>
 
   <properties>
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.3</version.obfuscation-core>
     <version.spring-boot>2.4.1</version.spring-boot>
+
+    <robtimus.site-index.generate>false</robtimus.site-index.generate>
   </properties>
 
   <dependencyManagement>
@@ -128,6 +130,12 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <inherited>false</inherited>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <inherited>false</inherited>
       </plugin>
@@ -164,6 +172,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${version.plugin.javadoc}</version>
+        <inherited>false</inherited>
         <reportSets>
           <reportSet>
             <reports>

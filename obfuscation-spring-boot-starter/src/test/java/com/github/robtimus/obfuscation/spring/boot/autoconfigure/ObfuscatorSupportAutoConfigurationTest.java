@@ -63,7 +63,7 @@ class ObfuscatorSupportAutoConfigurationTest {
     void testDisabled() {
         contextRunner
                 .withPropertyValues("obfuscation.obfuscator-support.enabled=false")
-                // with ObfuscatedSupportAutoConfiguration disabled, injecting Obfuscator will not be allowed
+                // with ObfuscatedSupportAutoConfiguration disabled, autowiring Obfuscator will not be allowed
                 .run(context -> assertThat(context).hasFailed());
     }
 
