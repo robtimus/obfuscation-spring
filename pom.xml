@@ -115,6 +115,7 @@
               <link>https://docs.spring.io/spring-boot/docs/current/api</link>
               <link>https://docs.spring.io/spring-framework/docs/current/javadoc-api</link>
               <link>https://robtimus.github.io/obfuscation-core/apidocs/</link>
+              <link>https://robtimus.github.io/obfuscation-annotations/apidocs/</link>
             </links>
           </configuration>
         </plugin>
