@@ -106,9 +106,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         @Nested
         @DisplayName("with obfuscator bean")
         @ExtendWith(SpringExtension.class)
-        @ContextConfiguration(classes = {
-                ProcessorProvider.class, LocalDateProvider.class, ObfuscatorProvider.class, BeanWithAutowiredObfuscatedFields.class
-        })
+        @ContextConfiguration(
+                classes = { ProcessorProvider.class, LocalDateProvider.class, ObfuscatorProvider.class, BeanWithAutowiredObfuscatedFields.class }
+        )
         class WithObfuscatorBean {
 
             @Autowired
@@ -225,9 +225,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         @Nested
         @DisplayName("with obfuscator bean")
         @ExtendWith(SpringExtension.class)
-        @ContextConfiguration(classes = {
-                ProcessorProvider.class, LocalDateProvider.class, ObfuscatorProvider.class, BeanWithObfuscatedConstructorArgument.class
-        })
+        @ContextConfiguration(
+                classes = { ProcessorProvider.class, LocalDateProvider.class, ObfuscatorProvider.class, BeanWithObfuscatedConstructorArgument.class }
+        )
         class WithObfuscatorBean {
 
             @Autowired
@@ -354,9 +354,9 @@ class ObfuscatedSupportBeanFactoryPostProcessorTest {
         @Nested
         @DisplayName("with obfuscator bean")
         @ExtendWith(SpringExtension.class)
-        @ContextConfiguration(classes = {
-                ProcessorProvider.class, LocalDateProvider.class, ObfuscatorProvider.class, BeanWithObfuscatedMethodArgument.class
-        })
+        @ContextConfiguration(
+                classes = { ProcessorProvider.class, LocalDateProvider.class, ObfuscatorProvider.class, BeanWithObfuscatedMethodArgument.class }
+        )
         class WithObfuscatorBean {
 
             @Autowired
