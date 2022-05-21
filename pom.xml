@@ -69,7 +69,7 @@
   <properties>
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.4</version.obfuscation-core>
-    <version.spring-boot>2.6.7</version.spring-boot>
+    <version.spring-boot>2.7.0</version.spring-boot>
 
     <robtimus.site-index.generate>false</robtimus.site-index.generate>
   </properties>
