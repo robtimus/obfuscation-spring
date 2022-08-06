@@ -218,6 +218,8 @@
     <profile>
       <id>min-versions</id>
       <properties>
+        <!-- Mockito 4.5.0 and up give conflicts with the byte buddy provided / needed for Spring Boot 2.3.1 -->
+        <version.mockito>4.4.0</version.mockito>
         <version.spring-boot>2.3.1.RELEASE</version.spring-boot>
       </properties>
     </profile>
