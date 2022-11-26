@@ -69,6 +69,6 @@ public class ObfuscatorPropertiesCondition extends SpringBootCondition {
         Environment environment = context.getEnvironment();
         boolean hasProperty = properties.stream()
                 .anyMatch(environment::containsProperty);
-        return hasProperty ? ConditionOutcome.match() : ConditionOutcome.noMatch(Messages.ObfuscatorPropertiesCondition.noMatch.get(properties));
+        return hasProperty ? ConditionOutcome.match() : ConditionOutcome.noMatch(Messages.ObfuscatorPropertiesCondition.noMatch(properties));
     }
 }

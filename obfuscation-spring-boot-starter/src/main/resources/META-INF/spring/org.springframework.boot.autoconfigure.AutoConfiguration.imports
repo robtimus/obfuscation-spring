@@ -1,0 +1,3 @@
+com.github.robtimus.obfuscation.spring.boot.autoconfigure.ObfuscatorAutoConfiguration
+com.github.robtimus.obfuscation.spring.boot.autoconfigure.ObfuscatorSupportAutoConfiguration
+com.github.robtimus.obfuscation.spring.boot.autoconfigure.ObfuscatedSupportAutoConfiguration

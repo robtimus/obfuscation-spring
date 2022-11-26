@@ -87,7 +87,7 @@ final class ObfuscatorPropertiesTest {
 
             Set<ConstraintViolation<ObfuscatorProperties>> violations = validator.validate(properties);
 
-            assertThat(violations, contains(matchesViolation(equalTo(Messages.ObfuscatorProperties.noObfuscationModes.get()), equalTo("mode"))));
+            assertThat(violations, contains(matchesViolation(equalTo(Messages.ObfuscatorProperties.noObfuscationModes()), equalTo("mode"))));
         }
 
         @Nested
@@ -169,7 +169,7 @@ final class ObfuscatorPropertiesTest {
             Set<ConstraintViolation<ObfuscatorProperties>> violations = validator.validate(properties);
 
             assertThat(violations, contains(
-                    matchesViolation(equalTo(Messages.ObfuscatorProperties.multipleObfuscationModes.get()), equalTo("mode"))));
+                    matchesViolation(equalTo(Messages.ObfuscatorProperties.multipleObfuscationModes()), equalTo("mode"))));
         }
 
         @Nested
@@ -538,7 +538,7 @@ final class ObfuscatorPropertiesTest {
             ObfuscatorProperties properties = new ObfuscatorProperties();
 
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> properties.createObfuscator(beanFactory));
-            assertEquals(Messages.ObfuscatorProperties.noObfuscationModes.get(), exception.getMessage());
+            assertEquals(Messages.ObfuscatorProperties.noObfuscationModes(), exception.getMessage());
         }
 
         @Test
@@ -556,7 +556,7 @@ final class ObfuscatorPropertiesTest {
             properties.setProviderClass(TestObfuscatorProvider.class);
 
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> properties.createObfuscator(beanFactory));
-            assertEquals(Messages.ObfuscatorProperties.multipleObfuscationModes.get(), exception.getMessage());
+            assertEquals(Messages.ObfuscatorProperties.multipleObfuscationModes(), exception.getMessage());
         }
 
         @Nested
@@ -606,7 +606,7 @@ final class ObfuscatorPropertiesTest {
                 properties.setMode(ObfuscationMode.FIXED_LENGTH);
 
                 IllegalStateException exception = assertThrows(IllegalStateException.class, () -> properties.createObfuscator(beanFactory));
-                assertEquals(Messages.ObfuscatorProperties.missingProperty.get("fixedLength"), exception.getMessage());
+                assertEquals(Messages.ObfuscatorProperties.missingProperty("fixedLength"), exception.getMessage());
             }
 
             @Test
@@ -643,7 +643,7 @@ final class ObfuscatorPropertiesTest {
                 properties.setMode(ObfuscationMode.FIXED_VALUE);
 
                 IllegalStateException exception = assertThrows(IllegalStateException.class, () -> properties.createObfuscator(beanFactory));
-                assertEquals(Messages.ObfuscatorProperties.missingProperty.get("fixedValue"), exception.getMessage());
+                assertEquals(Messages.ObfuscatorProperties.missingProperty("fixedValue"), exception.getMessage());
             }
 
             @Test
@@ -772,7 +772,7 @@ final class ObfuscatorPropertiesTest {
                 properties.setMode(ObfuscationMode.PROVIDER);
 
                 IllegalStateException exception = assertThrows(IllegalStateException.class, () -> properties.createObfuscator(beanFactory));
-                assertEquals(Messages.ObfuscatorProperties.missingProperty.get("providerClass"), exception.getMessage());
+                assertEquals(Messages.ObfuscatorProperties.missingProperty("providerClass"), exception.getMessage());
             }
 
             @Test

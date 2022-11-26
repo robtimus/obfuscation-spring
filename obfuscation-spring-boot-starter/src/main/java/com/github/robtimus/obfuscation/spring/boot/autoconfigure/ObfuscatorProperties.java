@@ -282,10 +282,10 @@ public class ObfuscatorProperties {
         }
         Set<ObfuscationMode> obfuscationModes = determineObfuscationModes();
         if (obfuscationModes.isEmpty()) {
-            throw new IllegalStateException(Messages.ObfuscatorProperties.noObfuscationModes.get());
+            throw new IllegalStateException(Messages.ObfuscatorProperties.noObfuscationModes());
         }
         if (obfuscationModes.size() > 1) {
-            throw new IllegalStateException(Messages.ObfuscatorProperties.multipleObfuscationModes.get());
+            throw new IllegalStateException(Messages.ObfuscatorProperties.multipleObfuscationModes());
         }
         return obfuscationModes.iterator().next();
     }
@@ -316,14 +316,14 @@ public class ObfuscatorProperties {
 
     private int fixedLength() {
         if (fixedLength == null) {
-            throw new IllegalStateException(Messages.ObfuscatorProperties.missingProperty.get(FIELD_FIXED_LENGTH));
+            throw new IllegalStateException(Messages.ObfuscatorProperties.missingProperty(FIELD_FIXED_LENGTH));
         }
         return fixedLength;
     }
 
     private String fixedValue() {
         if (fixedValue == null) {
-            throw new IllegalStateException(Messages.ObfuscatorProperties.missingProperty.get(FIELD_FIXED_VALUE));
+            throw new IllegalStateException(Messages.ObfuscatorProperties.missingProperty(FIELD_FIXED_VALUE));
         }
         return fixedValue;
     }
@@ -347,7 +347,7 @@ public class ObfuscatorProperties {
 
     private Class<? extends ObfuscatorProvider> obfuscatorProviderClass() {
         if (providerClass == null) {
-            throw new IllegalStateException(Messages.ObfuscatorProperties.missingProperty.get(FIELD_PROVIDER_CLASS));
+            throw new IllegalStateException(Messages.ObfuscatorProperties.missingProperty(FIELD_PROVIDER_CLASS));
         }
         return providerClass;
     }
@@ -420,13 +420,13 @@ public class ObfuscatorProperties {
 
             Set<ObfuscationMode> obfuscationModes = properties.determineObfuscationModes();
             if (obfuscationModes.isEmpty()) {
-                context.buildConstraintViolationWithTemplate(Messages.ObfuscatorProperties.noObfuscationModes.get())
+                context.buildConstraintViolationWithTemplate(Messages.ObfuscatorProperties.noObfuscationModes())
                         .addPropertyNode(FIELD_MODE)
                         .addConstraintViolation();
                 return false;
             }
             if (obfuscationModes.size() > 1) {
-                context.buildConstraintViolationWithTemplate(Messages.ObfuscatorProperties.multipleObfuscationModes.get())
+                context.buildConstraintViolationWithTemplate(Messages.ObfuscatorProperties.multipleObfuscationModes())
                         .addPropertyNode(FIELD_MODE)
                         .addConstraintViolation();
                 return false;
