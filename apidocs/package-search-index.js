@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.github.robtimus.obfuscation.spring"},{"l":"com.github.robtimus.obfuscation.spring.boot.autoconfigure"}];updateSearchResults();
