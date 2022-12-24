@@ -31,11 +31,11 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
-import javax.validation.Constraint;
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import javax.validation.Payload;
-import javax.validation.constraints.Min;
+import jakarta.validation.Constraint;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.Payload;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.validation.annotation.Validated;
 import com.github.robtimus.obfuscation.Obfuscator;
@@ -533,7 +533,7 @@ public class ObfuscatorProperties {
 
         private static boolean isNotSet(Object value, String fieldName, ConstraintValidatorContext context) {
             if (value != null) {
-                context.buildConstraintViolationWithTemplate("{javax.validation.constraints.Null.message}") //$NON-NLS-1$
+                context.buildConstraintViolationWithTemplate("{jakarta.validation.constraints.Null.message}") //$NON-NLS-1$
                         .addPropertyNode(fieldName)
                         .addConstraintViolation();
                 return false;
@@ -557,7 +557,7 @@ public class ObfuscatorProperties {
 
         private static boolean isSet(Object value, String fieldName, ConstraintValidatorContext context) {
             if (value == null) {
-                context.buildConstraintViolationWithTemplate("{javax.validation.constraints.NotNull.message}") //$NON-NLS-1$
+                context.buildConstraintViolationWithTemplate("{jakarta.validation.constraints.NotNull.message}") //$NON-NLS-1$
                         .addPropertyNode(fieldName)
                         .addConstraintViolation();
                 return false;

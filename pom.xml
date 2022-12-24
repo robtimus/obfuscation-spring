@@ -67,11 +67,16 @@
   </issueManagement>
 
   <properties>
+    <version.java>17</version.java>
+
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.4</version.obfuscation-core>
-    <version.spring-boot>2.7.6</version.spring-boot>
+    <version.spring-boot>3.0.1</version.spring-boot>
 
     <robtimus.site-index.generate>false</robtimus.site-index.generate>
+
+    <version.plugin.javadoc>3.4.0</version.plugin.javadoc>
+    <version.plugin.site>3.12.0</version.plugin.site>
   </properties>
 
   <dependencyManagement>
@@ -218,9 +223,7 @@
     <profile>
       <id>min-versions</id>
       <properties>
-        <!-- Mockito 4.5.0 and up give conflicts with the byte buddy provided / needed for Spring Boot 2.3.1 -->
-        <version.mockito>4.4.0</version.mockito>
-        <version.spring-boot>2.3.1.RELEASE</version.spring-boot>
+        <version.spring-boot>3.0.0</version.spring-boot>
       </properties>
     </profile>
   </profiles>
