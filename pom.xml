@@ -77,6 +77,8 @@
 
     <version.plugin.javadoc>3.4.0</version.plugin.javadoc>
     <version.plugin.site>3.12.0</version.plugin.site>
+
+    <argLine />
   </properties>
 
   <dependencyManagement>
