@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.github.robtimus</groupId>
     <artifactId>robtimus-parent</artifactId>
-    <version>1.6</version>
+    <version>1.8</version>
     <relativePath />
   </parent>
 
@@ -70,8 +70,6 @@
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.4</version.obfuscation-core>
     <version.spring-boot>2.7.6</version.spring-boot>
-
-    <robtimus.site-index.generate>false</robtimus.site-index.generate>
   </properties>
 
   <dependencyManagement>
@@ -121,26 +119,11 @@
         </plugin>
 
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>copy-license</id>
-              <phase>generate-sources</phase>
-              <goals>
-                <goal>run</goal>
-              </goals>
-              <configuration>
-                <target>
-                  <copy todir="${project.build.directory}/apidocs/META-INF">
-                    <fileset dir="${project.basedir}/..">
-                      <include name="LICENSE.txt" />
-                    </fileset>
-                  </copy>
-                </target>
-              </configuration>
-            </execution>
-          </executions>
+          <groupId>com.github.robtimus</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <configuration>
+            <maxParentCount>1</maxParentCount>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -153,15 +136,13 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
+        <groupId>com.github.robtimus</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <configuration>
+          <skipLicense>true</skipLicense>
+          <skipSiteIndex>true</skipSiteIndex>
+        </configuration>
         <inherited>false</inherited>
-        <executions>
-          <execution>
-            <id>copy-license</id>
-            <phase>none</phase>
-          </execution>
-        </executions>
       </plugin>
 
       <plugin>
