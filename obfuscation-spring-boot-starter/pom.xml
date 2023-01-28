@@ -90,20 +90,6 @@
   </dependencies>
 
   <build>
-    <resources>
-      <!-- add LICENSE.txt to META-INF besides the main resources -->
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <resource>
-        <directory>${project.basedir}/..</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE.txt</include>
-        </includes>
-      </resource>
-    </resources>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -173,8 +159,11 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
+        <groupId>com.github.robtimus</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <configuration>
+          <skipSiteIndex>true</skipSiteIndex>
+        </configuration>
       </plugin>
 
       <plugin>
