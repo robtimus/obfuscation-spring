@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.stream.Collectors;
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -273,7 +272,7 @@ public class ObfuscatorProperties {
         Objects.requireNonNull(objectFactory);
         return properties.stream()
                 .map(p -> p.createObfuscator(objectFactory))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     ObfuscationMode determineObfuscationMode() {

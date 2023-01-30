@@ -20,7 +20,6 @@ package com.github.robtimus.obfuscation.spring.boot.autoconfigure;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.context.annotation.ConditionContext;
@@ -61,7 +60,7 @@ public class ObfuscatorPropertiesCondition extends SpringBootCondition {
     protected ObfuscatorPropertiesCondition(String prefix) {
         properties = NAMES.stream()
                 .map(n -> prefix + "." + n)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
