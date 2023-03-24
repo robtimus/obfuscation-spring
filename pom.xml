@@ -69,6 +69,7 @@
   <properties>
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.4</version.obfuscation-core>
+    <version.snakeyaml>2.0</version.snakeyaml>
     <version.spring-boot>2.7.10</version.spring-boot>
   </properties>
 
@@ -90,6 +91,13 @@
         <groupId>com.github.robtimus</groupId>
         <artifactId>obfuscation-spring-beans</artifactId>
         <version>${project.version}</version>
+      </dependency>
+
+      <!-- Override version provided by spring-boot-starter until it uses a more secure version itself -->
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${version.snakeyaml}</version>
       </dependency>
 
       <dependency>
