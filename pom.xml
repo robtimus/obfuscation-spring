@@ -70,7 +70,7 @@
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.4</version.obfuscation-core>
     <version.snakeyaml>2.0</version.snakeyaml>
-    <version.spring-boot>2.7.10</version.spring-boot>
+    <version.spring-boot>2.7.11</version.spring-boot>
   </properties>
 
   <dependencyManagement>
@@ -118,8 +118,8 @@
           <artifactId>maven-javadoc-plugin</artifactId>
           <configuration>
             <links>
-              <link>https://docs.spring.io/spring-boot/docs/current/api</link>
-              <link>https://docs.spring.io/spring-framework/docs/current/javadoc-api</link>
+              <link>https://docs.spring.io/spring-boot/docs/2.7.x/api</link>
+              <link>https://docs.spring.io/spring-framework/docs/5.3.x/javadoc-api</link>
               <link>https://robtimus.github.io/obfuscation-core/apidocs/</link>
               <link>https://robtimus.github.io/obfuscation-annotations/apidocs/</link>
             </links>
