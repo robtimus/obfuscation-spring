@@ -20,6 +20,7 @@ package com.github.robtimus.obfuscation.spring.boot.autoconfigure;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -42,6 +43,7 @@ class NestedObfuscatorPropertiesTest {
         contextRunner.run(context -> {
             ComplexProperties propertiesWithObfuscators = context.getBean(ComplexProperties.class);
             assertThat(propertiesWithObfuscators.getObfuscators()).isNullOrEmpty();
+            assertThat(propertiesWithObfuscators.getNested()).isNull();
         });
     }
 
@@ -52,7 +54,9 @@ class NestedObfuscatorPropertiesTest {
                 "complex.obfuscators.0.mode=ALL",
                 "complex.obfuscators.1.fixed-length=8", "complex.obfuscators.1.mask-char=x",
                 "complex.obfuscators.2.fixed-value=<fixed>",
-                "complex.nested.obfuscator.provider-class=" + TestObfuscatorProvider.class.getName()
+                "complex.nested.obfuscator.provider-class=" + TestObfuscatorProvider.class.getName(),
+                "complex.nested.mapped.foo.mode=NONE",
+                "complex.nested.mapped.bar.fixed-length=3"
                 )
                 .run(context -> {
                     List<Obfuscator> expected = Arrays.asList(
@@ -68,11 +72,17 @@ class NestedObfuscatorPropertiesTest {
                     List<Obfuscator> obfuscators = ObfuscatorProperties.createObfuscators(complexProperties.getObfuscators(), beanFactory);
                     assertThat(obfuscators).isEqualTo(expected);
 
-                    assertThat(complexProperties.getNested()).isNotNull();
-                    assertThat(complexProperties.getNested().getObfuscator()).isNotNull();
+                    NestedProperties nested = complexProperties.getNested();
+                    assertThat(nested).isNotNull();
+                    assertThat(nested.getObfuscator()).isNotNull();
 
-                    Obfuscator obfuscator = complexProperties.getNested().getObfuscator().createObfuscator(beanFactory);
+                    Obfuscator obfuscator = nested.getObfuscator().createObfuscator(beanFactory);
                     assertThat(obfuscator).isEqualTo(TestObfuscatorProvider.OBFUSCATOR);
+
+                    Map<String, Obfuscator> mappedObfuscators = ObfuscatorProperties.createObfuscators(nested.getMapped(), beanFactory);
+                    assertThat(mappedObfuscators).isNotNull();
+                    assertThat(mappedObfuscators).containsEntry("foo", Obfuscator.none());
+                    assertThat(mappedObfuscators).containsEntry("bar", Obfuscator.fixedLength(3));
                 });
     }
 
@@ -125,6 +135,7 @@ class NestedObfuscatorPropertiesTest {
     static class NestedProperties {
 
         private ObfuscatorProperties obfuscator;
+        private Map<String, ObfuscatorProperties> mapped;
 
         public ObfuscatorProperties getObfuscator() {
             return obfuscator;
@@ -132,6 +143,14 @@ class NestedObfuscatorPropertiesTest {
 
         public void setObfuscator(ObfuscatorProperties obfuscator) {
             this.obfuscator = obfuscator;
+        }
+
+        public Map<String, ObfuscatorProperties> getMapped() {
+            return mapped;
+        }
+
+        public void setMapped(Map<String, ObfuscatorProperties> mapped) {
+            this.mapped = mapped;
         }
     }
 }

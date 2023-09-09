@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -249,7 +250,7 @@ public class ObfuscatorProperties {
     /**
      * Creates obfuscators based on the properties configured in multiple properties objects.
      *
-     * @param properties A collection of properties object for which to create obfuscators.
+     * @param properties A collection of properties objects for which to create obfuscators.
      * @param beanFactory A bean factory to use to create instances of {@link ObfuscatorProvider} if needed.
      * @return The created obfuscators.
      * @throws NullPointerException If the given collection, any of its elements, or the given bean factory is {@code null}.
@@ -263,7 +264,7 @@ public class ObfuscatorProperties {
     /**
      * Creates obfuscators based on the properties configured in multiple properties objects.
      *
-     * @param properties A collection of properties object for which to create obfuscators.
+     * @param properties A collection of properties objects for which to create obfuscators.
      * @param objectFactory The object factory to use to create instances of {@link ObfuscatorProvider} if needed.
      * @return The created obfuscators.
      * @throws NullPointerException If the given collection, any of its elements, or the given bean factory is {@code null}.
@@ -274,6 +275,43 @@ public class ObfuscatorProperties {
         return properties.stream()
                 .map(p -> p.createObfuscator(objectFactory))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Creates obfuscators based on the properties configured in multiple properties objects.
+     *
+     * @param <K> The map key type.
+     * @param properties A map with properties objects for which to create obfuscators.
+     * @param beanFactory A bean factory to use to create instances of {@link ObfuscatorProvider} if needed.
+     * @return The created obfuscators.
+     * @throws NullPointerException If the given map, any of its values, or the given bean factory is {@code null}.
+     * @throws IllegalStateException If any of the properties objects is in an inconsistent state.
+     * @since 1.4
+     */
+    public static <K> Map<K, Obfuscator> createObfuscators(Map<? extends K, ObfuscatorProperties> properties,
+            AutowireCapableBeanFactory beanFactory) {
+
+        ObjectFactory objectFactory = new BeanFactoryObjectFactory(beanFactory);
+        return createObfuscators(properties, objectFactory);
+    }
+
+    /**
+     * Creates obfuscators based on the properties configured in multiple properties objects.
+     *
+     * @param <K> The map key type.
+     * @param properties A map with properties objects for which to create obfuscators.
+     * @param objectFactory The object factory to use to create instances of {@link ObfuscatorProvider} if needed.
+     * @return The created obfuscators.
+     * @throws NullPointerException If the given map, any of its values, or the given bean factory is {@code null}.
+     * @throws IllegalStateException If any of the properties objects is in an inconsistent state.
+     * @since 1.4
+     */
+    public static <K> Map<K, Obfuscator> createObfuscators(Map<? extends K, ObfuscatorProperties> properties, ObjectFactory objectFactory) {
+        Objects.requireNonNull(objectFactory);
+        return properties.entrySet()
+                .stream()
+                // The map's own keys are used as map keys, so no risk of IllegalStateExceptions
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().createObfuscator(objectFactory)));
     }
 
     ObfuscationMode determineObfuscationMode() {
