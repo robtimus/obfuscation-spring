@@ -268,7 +268,7 @@ class ObfuscatorPropertiesConditionTest {
 
                         Obfuscator obfuscator = properties.createObfuscator(context.getAutowireCapableBeanFactory());
 
-                        assertThat(obfuscator).isSameAs(TestObfuscatorProvider.OBFUSCATOR);
+                        assertThat(obfuscator).isEqualTo(TestObfuscatorProvider.beanFactoryCreatedObfuscator());
                     });
         }
 
@@ -281,7 +281,7 @@ class ObfuscatorPropertiesConditionTest {
 
                         Obfuscator obfuscator = properties.createObfuscator(context.getAutowireCapableBeanFactory());
 
-                        assertThat(obfuscator).isSameAs(TestObfuscatorProvider.OBFUSCATOR);
+                        assertThat(obfuscator).isEqualTo(TestObfuscatorProvider.beanFactoryCreatedObfuscator());
                     });
         }
     }
