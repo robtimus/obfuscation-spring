@@ -17,19 +17,33 @@
 
 package com.github.robtimus.obfuscation.spring.boot.autoconfigure;
 
+import org.springframework.beans.factory.annotation.Value;
 import com.github.robtimus.obfuscation.Obfuscator;
 import com.github.robtimus.obfuscation.annotation.ObfuscatorProvider;
 
 class TestObfuscatorProvider implements ObfuscatorProvider {
 
-    static final Obfuscator OBFUSCATOR = Obfuscator.portion()
-            .keepAtStart(2)
-            .keepAtEnd(2)
-            .withFixedTotalLength(8)
-            .build();
+    @Value("${fixedTotalLength:8}")
+    private int fixedTotalLength = 16;
 
     @Override
     public Obfuscator obfuscator() {
-        return OBFUSCATOR;
+        return obfuscator(fixedTotalLength);
+    }
+
+    static Obfuscator manuallyCreatedObfuscator() {
+        return obfuscator(16);
+    }
+
+    static Obfuscator beanFactoryCreatedObfuscator() {
+        return obfuscator(8);
+    }
+
+    private static Obfuscator obfuscator(int fixedTotalLength) {
+        return Obfuscator.portion()
+                .keepAtStart(2)
+                .keepAtEnd(2)
+                .withFixedTotalLength(fixedTotalLength)
+                .build();
     }
 }

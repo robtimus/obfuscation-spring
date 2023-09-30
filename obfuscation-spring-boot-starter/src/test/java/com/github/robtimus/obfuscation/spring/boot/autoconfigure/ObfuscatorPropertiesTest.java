@@ -26,7 +26,6 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasToString;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
@@ -791,7 +790,8 @@ final class ObfuscatorPropertiesTest {
                 properties.setProviderClass(TestObfuscatorProvider.class);
 
                 Obfuscator obfuscator = properties.createObfuscator(beanFactory);
-                assertSame(TestObfuscatorProvider.OBFUSCATOR, obfuscator);
+                // The provider is manually created so the @Value annotation is ignored
+                assertEquals(TestObfuscatorProvider.manuallyCreatedObfuscator(), obfuscator);
             }
 
             @Test
@@ -802,7 +802,8 @@ final class ObfuscatorPropertiesTest {
                 properties.setProviderClass(TestObfuscatorProvider.class);
 
                 Obfuscator obfuscator = properties.createObfuscator(beanFactory);
-                assertSame(TestObfuscatorProvider.OBFUSCATOR, obfuscator);
+                // The provider is manually created so the @Value annotation is ignored
+                assertEquals(TestObfuscatorProvider.manuallyCreatedObfuscator(), obfuscator);
             }
         }
     }
@@ -824,7 +825,7 @@ final class ObfuscatorPropertiesTest {
 
                         Obfuscator obfuscator = properties.createObfuscator(beanFactory);
 
-                        assertSame(TestObfuscatorProvider.OBFUSCATOR, obfuscator);
+                        assertEquals(TestObfuscatorProvider.beanFactoryCreatedObfuscator(), obfuscator);
                     });
         }
 

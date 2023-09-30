@@ -77,7 +77,7 @@ class NestedObfuscatorPropertiesTest {
                     assertThat(nested.getObfuscator()).isNotNull();
 
                     Obfuscator obfuscator = nested.getObfuscator().createObfuscator(beanFactory);
-                    assertThat(obfuscator).isEqualTo(TestObfuscatorProvider.OBFUSCATOR);
+                    assertThat(obfuscator).isEqualTo(TestObfuscatorProvider.beanFactoryCreatedObfuscator());
 
                     Map<String, Obfuscator> mappedObfuscators = ObfuscatorProperties.createObfuscators(nested.getMapped(), beanFactory);
                     assertThat(mappedObfuscators).isNotNull();
