@@ -49,8 +49,8 @@ import com.github.robtimus.obfuscation.annotation.RepresentedBy;
  *     with {@link Value}, it can be a bean, or anything else that has default autowiring support.
  * <li>Finding the obfuscator to use. The type of {@link Obfuscator} is determined as follows:
  *   <ul>
- *   <li>If the {@link Obfuscator} field, constructor argument or method argument is annotated with an {@link Obfuscator} annotation like
- *       {@link ObfuscateAll}, {@link ObfuscateFixedLength} or {@link ObfuscateUsing}, the autowired {@link Obfuscator} will match the annotation.
+ *   <li>If the {@link Obfuscated} field, constructor argument or method argument is annotated with an {@link Obfuscator} annotation like
+ *       {@link ObfuscateAll}, {@link ObfuscateFixedLength} or {@link ObfuscateUsing}, the autowired {@link Obfuscated} will match the annotation.
  *       </li>
  *   <li>Otherwise, if a bean of type {@link Obfuscator} is available, that will be autowired.</li>
  *   <li>Otherwise, a default {@link Obfuscator} will be autowired. This will be the result of calling
