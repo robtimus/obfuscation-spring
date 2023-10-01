@@ -71,8 +71,8 @@
 
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.5</version.obfuscation-core>
-    <version.snakeyaml>2.0</version.snakeyaml>
-    <version.spring-boot>3.1.0</version.spring-boot>
+    <version.snakeyaml>2.2</version.snakeyaml>
+    <version.spring-boot>3.1.4</version.spring-boot>
   </properties>
 
   <dependencyManagement>
