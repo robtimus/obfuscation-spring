@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.github.robtimus</groupId>
     <artifactId>robtimus-parent</artifactId>
-    <version>1.10</version>
+    <version>1.12</version>
     <relativePath />
   </parent>
 
@@ -72,7 +72,7 @@
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.5</version.obfuscation-core>
     <version.snakeyaml>2.2</version.snakeyaml>
-    <version.spring-boot>3.1.4</version.spring-boot>
+    <version.spring-boot>3.3.2</version.spring-boot>
   </properties>
 
   <dependencyManagement>
