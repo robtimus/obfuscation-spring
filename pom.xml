@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.github.robtimus</groupId>
     <artifactId>robtimus-parent</artifactId>
-    <version>1.12</version>
+    <version>1.13</version>
     <relativePath />
   </parent>
 
@@ -72,7 +72,7 @@
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.5</version.obfuscation-core>
     <version.snakeyaml>2.2</version.snakeyaml>
-    <version.spring-boot>3.3.2</version.spring-boot>
+    <version.spring-boot>3.3.5</version.spring-boot>
   </properties>
 
   <dependencyManagement>
@@ -209,6 +209,8 @@
     <profile>
       <id>min-versions</id>
       <properties>
+        <!-- Mockito 5.14.x in combination with Spring Boot 3.0.0 results in test failures -->
+        <version.mockito>5.13.0</version.mockito>
         <version.spring-boot>3.0.0</version.spring-boot>
       </properties>
     </profile>
