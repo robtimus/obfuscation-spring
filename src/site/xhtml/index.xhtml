@@ -10,14 +10,14 @@
   <p>Add <a href="obfuscation-spring-boot-starter/dependency-info.html">obfuscation-spring-boot-starter</a> as a dependency to your project to get the following:</p>
   <ul>
     <li>Autowire support for <a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html">Obfuscator</a>.<br />
-        Instances of <tt>Obfuscator</tt> can be autowired in two ways:
+        Instances of <code>Obfuscator</code> can be autowired in two ways:
       <ul>
         <li>Annotate an autowired field, constructor argument or method argument with any of the obfuscator annotations of <a href="https://robtimus.github.io/obfuscation-annotations">obfuscation-annotations</a>, and an instance of the matching obfuscator will be autowired.</li>
         <li>With no obfuscator annotation present, a default obfuscator is used.</li>
       </ul>
     </li>
     <li>Autowire support for <a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscated.html">Obfuscated</a>.<br />
-        Declaring an autowired field, constructor argument or method argument as <tt>Obfuscated</tt> will automatically wrap the autowired field or argument. This supports both autowired values and beans.<br />
+        Declaring an autowired field, constructor argument or method argument as <code>Obfuscated</code> will automatically wrap the autowired field or argument. This supports both autowired values and beans.<br />
         The obfuscator to use is determined in one of two ways:
       <ul>
         <li>Annotate the field or argument with any of the obfuscator annotations of <a href="https://robtimus.github.io/obfuscation-annotations">obfuscation-annotations</a> to use the matching obfuscation rules.</li>
@@ -57,12 +57,12 @@ private Obfuscated&lt;MyBean&gt; obfuscatedBean;</pre>
      Otherwise, the type is instantiated using Spring's own bean factory. This allows implementations to use autowired fields.</p>
 
   <h3>Vanilla Spring</h3>
-  <p>The automatic support for autowiring <tt>Obfuscator</tt> and <tt>Obfuscated</tt> only works when using <tt>obfuscation-spring-boot-starter</tt>. To add obfuscation support to vanilla Spring:</p>
+  <p>The automatic support for autowiring <code>Obfuscator</code> and <code>Obfuscated</code> only works when using <code>obfuscation-spring-boot-starter</code>. To add obfuscation support to vanilla Spring:</p>
   <ul>
-    <li>Add <a href="obfuscation-spring-beans/dependency-info.html">obfuscation-spring-beans</a> as a dependency to your project instead of <tt>obfuscation-spring-boot-starter</tt>.</li>
-    <li>Provide a bean of type <a href="apidocs/com/github/robtimus/obfuscation/spring/ObfuscatorSupportBeanFactoryPostProcessor.html">ObfuscatorSupportBeanFactoryPostProcessor</a> to allow <tt>Obfuscator</tt> to be autowired as above.</li>
-    <li>Provide a bean of type <a href="apidocs/com/github/robtimus/obfuscation/spring/ObfuscatedSupportBeanFactoryPostProcessor.html">ObfuscatedSupportBeanFactoryPostProcessor</a> to allow <tt>Obfuscated</tt> to be autowired as above.</li>
-    <li>Optionally provide a custom bean of type <a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html">Obfuscator</a> to override the default <tt>Obfuscator</tt>.</li>
+    <li>Add <a href="obfuscation-spring-beans/dependency-info.html">obfuscation-spring-beans</a> as a dependency to your project instead of <code>obfuscation-spring-boot-starter</code>.</li>
+    <li>Provide a bean of type <a href="apidocs/com/github/robtimus/obfuscation/spring/ObfuscatorSupportBeanFactoryPostProcessor.html">ObfuscatorSupportBeanFactoryPostProcessor</a> to allow <code>Obfuscator</code> to be autowired as above.</li>
+    <li>Provide a bean of type <a href="apidocs/com/github/robtimus/obfuscation/spring/ObfuscatedSupportBeanFactoryPostProcessor.html">ObfuscatedSupportBeanFactoryPostProcessor</a> to allow <code>Obfuscated</code> to be autowired as above.</li>
+    <li>Optionally provide a custom bean of type <a href="https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html">Obfuscator</a> to override the default <code>Obfuscator</code>.</li>
   </ul>
 </div>
 </body>
