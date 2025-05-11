@@ -31,15 +31,15 @@
   <pre class="source prettyprint">
 @Autowired
 @ObfuscateFixedLength(8)
-private Obfuscator obfuscator;
-
+private Obfuscator obfuscator;</pre>
+  <pre class="source prettyprint">
 @Autowired
-private Obfuscator defaultObfuscator;
-
+private Obfuscator defaultObfuscator;</pre>
+  <pre class="source prettyprint">
 @Value("${property}")
 @ObfuscateFixedLength(8)
-private Obfuscated&lt;String&gt; obfuscatedValue;
-
+private Obfuscated&lt;String&gt; obfuscatedValue;</pre>
+  <pre class="source prettyprint">
 @Autowired
 @ObfuscateFixedLength(8)
 @RepresentedBy(MyCharacterRepresentation.class)

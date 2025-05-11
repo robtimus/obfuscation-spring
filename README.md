@@ -23,21 +23,29 @@ Add [obfuscation-spring-boot-starter](https://robtimus.github.io/obfuscation-spr
 
 Examples:
 
-    @Autowired
-    @ObfuscateFixedLength(8)
-    private Obfuscator obfuscator;
+```java
+@Autowired
+@ObfuscateFixedLength(8)
+private Obfuscator obfuscator;
+```
 
-    @Autowired
-    private Obfuscator defaultObfuscator;
+```java
+@Autowired
+private Obfuscator defaultObfuscator;
+```
 
-    @Value("${property}")
-    @ObfuscateFixedLength(8)
-    private Obfuscated<String> obfuscatedValue;
+```java
+@Value("${property}")
+@ObfuscateFixedLength(8)
+private Obfuscated<String> obfuscatedValue;
+```
 
-    @Autowired
-    @ObfuscateFixedLength(8)
-    @RepresentedBy(MyCharacterRepresentation.class)
-    private Obfuscated<MyBean> obfuscatedBean;
+```java
+@Autowired
+@ObfuscateFixedLength(8)
+@RepresentedBy(MyCharacterRepresentation.class)
+private Obfuscated<MyBean> obfuscatedBean;
+```
 
 ## Default obfuscator
 
