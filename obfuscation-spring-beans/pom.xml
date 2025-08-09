@@ -88,6 +88,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
@@ -141,6 +148,7 @@
         <configuration>
           <argLine>
             @{argLine}
+            -javaagent:${org.mockito:mockito-core:jar}
             --add-opens java.base/java.lang=ALL-UNNAMED
           </argLine>
         </configuration>
