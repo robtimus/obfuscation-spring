@@ -209,8 +209,6 @@
     <profile>
       <id>min-versions</id>
       <properties>
-        <!-- Mockito 5.14.x in combination with Spring Boot 3.0.0 results in test failures -->
-        <version.mockito>5.13.0</version.mockito>
         <version.spring-boot>3.0.0</version.spring-boot>
       </properties>
     </profile>
