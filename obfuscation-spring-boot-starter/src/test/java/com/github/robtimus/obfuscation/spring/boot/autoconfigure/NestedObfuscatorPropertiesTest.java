@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import jakarta.validation.Valid;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -112,8 +113,8 @@ class NestedObfuscatorPropertiesTest {
     @EnableAutoConfiguration
     static class ComplexProperties {
 
-        private List<ObfuscatorProperties> obfuscators;
-        private NestedProperties nested;
+        private List<@Valid ObfuscatorProperties> obfuscators;
+        private @Valid NestedProperties nested;
 
         public List<ObfuscatorProperties> getObfuscators() {
             return obfuscators;
@@ -134,8 +135,8 @@ class NestedObfuscatorPropertiesTest {
 
     static class NestedProperties {
 
-        private ObfuscatorProperties obfuscator;
-        private Map<String, ObfuscatorProperties> mapped;
+        private @Valid ObfuscatorProperties obfuscator;
+        private Map<String, @Valid ObfuscatorProperties> mapped;
 
         public ObfuscatorProperties getObfuscator() {
             return obfuscator;

@@ -18,7 +18,8 @@
   <p>For an example, see <a href="https://github.com/robtimus/obfuscation-spring/blob/master/obfuscation-spring-boot-starter/src/main/java/com/github/robtimus/obfuscation/spring/boot/autoconfigure/ObfuscatorAutoConfiguration.java">ObfuscatorAutoConfiguration.java</a>.</p>
 
   <h3>Nesting obfuscators</h3>
-  <p>It's possible to nest <code>ObfuscatorProperties</code> in another auto-configuration properties class. Make sure that the root properties class of the structure containing the <code>ObfuscatorProperties</code> instances is annotated with <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/validation/annotation/Validated.html">@Validated</a>.
+  <p>It's possible to nest <code>ObfuscatorProperties</code> in another auto-configuration properties class. Make sure that the root properties class of the structure containing the <code>ObfuscatorProperties</code> instances is annotated with <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/validation/annotation/Validated.html">@Validated</a>,
+     and each occurrence of <code>ObfuscatorProperties</code> (including in lists or maps) is annotated with <a href="https://jakarta.ee/specifications/platform/11/apidocs/jakarta/validation/valid">@Valid</a>.
      This will ensure that the <code>ObfuscatorProperties</code> instances are in a consistent state.</p>
 </div>
 </body>
