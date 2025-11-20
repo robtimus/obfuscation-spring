@@ -212,5 +212,12 @@
         <version.spring-boot>3.0.0</version.spring-boot>
       </properties>
     </profile>
+
+    <profile>
+      <id>spring-boot-4</id>
+      <properties>
+        <version.spring-boot>4.0.0</version.spring-boot>
+      </properties>
+    </profile>
   </profiles>
 </project>
