@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/robtimus/obfuscation-spring/actions/workflows/build.yml/badge.svg)](https://github.com/robtimus/obfuscation-spring/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.github.robtimus%3Aobfuscation-spring&metric=alert_status)](https://sonarcloud.io/summary/overall?id=com.github.robtimus%3Aobfuscation-spring)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.robtimus%3Aobfuscation-spring&metric=coverage)](https://sonarcloud.io/summary/overall?id=com.github.robtimus%3Aobfuscation-spring)
-[![Known Vulnerabilities](https://snyk.io/test/github/robtimus/obfuscation-spring/badge.svg?targetFile=obfuscation-spring-boot-starter/pom.xml)](https://snyk.io/test/github/robtimus/obfuscation-spring?targetFile=obfuscation-spring-boot-starter/pom.xml)
 
 Provides Spring and Spring Boot obfuscation support.
 
