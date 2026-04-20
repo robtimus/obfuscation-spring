@@ -69,10 +69,10 @@
   <properties>
     <version.java>17</version.java>
 
-    <version.junit>6.0.2</version.junit>
+    <version.junit>6.0.3</version.junit>
     <version.obfuscation-annotations>2.0</version.obfuscation-annotations>
     <version.obfuscation-core>1.5</version.obfuscation-core>
-    <version.spring-boot>3.5.10</version.spring-boot>
+    <version.spring-boot>4.0.5</version.spring-boot>
   </properties>
 
   <dependencyManagement>
@@ -203,13 +203,6 @@
       <id>min-versions</id>
       <properties>
         <version.spring-boot>3.0.0</version.spring-boot>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>spring-boot-4</id>
-      <properties>
-        <version.spring-boot>4.0.0</version.spring-boot>
       </properties>
     </profile>
   </profiles>
